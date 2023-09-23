@@ -1,0 +1,31 @@
+{% extends 'MyBlog/base.html' %}
+
+{% block content %}
+{% include 'MyBlog/header.html' %}
+<div class="container-fluid">
+
+    <div class="jumbotron text-center">
+        <h1>Hey,I am Shubham Upadhyay</h1>
+        <p class="lead mt-2">Highly motivated and accomplished MSc(IT) graduate with a passion for software development and a strong
+           proficiency in Python, Django, HTML, CSS, Bootstrap, and SQL</p>
+    </div>
+    <div class="row">
+        {% for b in blog %}
+        <div class="col-md-6">
+                <div class="card m-4 bg-light">
+                    <div class="card-body">
+                        <h3 class="card-title">{{b.blog_title}}</h3>
+                        <p class="card-text lead">{{b.blog_text |truncatechars:500|safe}}</p>
+                       <a href="{% url 'details' b.pk %}"><button class="btn btn-primary">Read More <span><i class="fa fa-arrow-right"aria-hidden="true"></i></span></button></a>
+                        
+                    </div>
+                </div>
+               
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% include 'MyBlog/footer.html' %}
+{% endblock %}
