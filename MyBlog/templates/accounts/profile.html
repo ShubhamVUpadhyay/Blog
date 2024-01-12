@@ -1,0 +1,48 @@
+{% extends 'MyBlog/base.html' %}
+
+{% block content %}
+{% include 'MyBlog/header.html' %}
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="jumbotron">
+                <div class="card">
+                    <h4 class="card-header text-primary">Hello {{user.username}}</h4>
+                    <p class="lead">{{user.bio}}</p>
+                    
+                    <div class="profile-img">
+                        <!---Image -->
+                    </div>
+                <div class="card-body">
+                <h4 class="card-title">Update Profile</h4>
+                <hr>
+                <p><strong>Username</strong>: {{user.username}}</p>
+                <p><strong>First Name</strong> : {{user.first_name}}</p>
+                <p><strong>Last Name</strong> : {{user.last_name}}</p>
+                <p><strong>Email</strong> : {{user.email}}</p>
+               
+                <hr>
+               
+                <a href="{% url 'update-profile' %}"><button class="btn btn-primary">Update</button></a>
+                </div>
+                <h4 class="card-footer">Additional Setiings</h4>
+       
+                <div class="links mx-4 my-3">
+                    <i class="fa fa-key mr-2" aria-hidden="true"></i><a href="{% url 'change-pass' %}" class="card-link mr-2">Change Password</a>
+                    {% if authorization_request and authorization_request.is_approved %}
+                    <i class="fa fa-user mr-2" aria-hidden="true"></i><a href="#" class="card-link text-success">You are Creator Now</a>
+                    {% else %}
+                    <i class="fa fa-pencil mr-2" aria-hidden="true"></i><a href="{% url 'req-author' %}" class="card-link">Request Authorship</a>
+                    {% endif %}
+                </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endif %}
+{% endblock %}

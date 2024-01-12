@@ -1,0 +1,50 @@
+{% extends 'MyBlog/base.html' %}
+
+{% block content %}
+
+<!-- Nav tabs -->
+<div class="navbar navbar-expand-lg navbar-light bg-light my-3">
+    <h1 class="navbar-brand bg-danger p-1 text-white">SMBlogs</h1>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="nav" id="navId">
+            <li class="nav-item">
+                <a href="{% url 'index' %}" class="nav-link {% if request.path == '/' %}text-primary{% else %}text-danger{% endif %}">Home</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'profile' %}" class="nav-link {% if request.path == '/profile/' %}text-primary{% else %}text-danger{% endif %}">My Profile</a>
+                </li>
+               
+                    <li class="nav-item">
+                        <a href="{% url 'myposts' %}" class="nav-link {% if request.path == '/myposts/' %}text-primary{% else %}text-danger{% endif %}">My Posts</a>
+                    </li>
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}" class="nav-link {% if request.path == '/logout/' %}text-primary{% else %}text-danger{% endif %}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'login' %}" class="nav-link {% if request.path == '/login/' %}text-primary{% else %}text-danger{% endif %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'register' %}" class="nav-link {% if request.path == '/register/' %}text-primary{% else %}text-danger{% endif %}">
+                        <button class="btn btn-sm btn-primary">Signup</button>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'contact' %}" class="nav-link {% if request.path == '/contact/' %}text-primary{% else %}text-danger{% endif %}">
+                        <button class="btn btn-sm btn-danger">Contact</button>
+                    </a>
+                </li>
+            {% endif %}
+            
+
+
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

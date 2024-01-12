@@ -1,0 +1,28 @@
+{% extends 'MyBlog/base.html' %}
+{% block content %}
+{% include 'MyBlog/header.html' %}
+
+<div class="container">
+    <div class="jumbotron">
+        <h2>Search Results for "{{ query }}"</h2>
+    </div>
+    <div class="row">
+        {% if blog_posts %}
+        {% for b in blog_posts %}
+        <div class="col-md-6">
+            <div class="card m-4 bg-light">
+                <div class="card-body">
+                    <h3 class="card-title">{{b.blog_title}}</h3>
+                    <p class="card-text lead">{{b.blog_text |truncatechars:500|safe}}</p>
+                   <a href="{% url 'details' b.pk %}"><button class="btn btn-primary">Read More <span><i class="fa fa-arrow-right"aria-hidden="true"></i></span></button></a>  
+                </div>
+            </div>           
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="lead text-center text-danger">No matching blog posts found.</p>
+      {% endif %}
+    </div>
+</div>
+{% include 'MyBlog/footer.html' %} 
+{% endblock %}
